@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Balloon Animation - Mahi Chudasama</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #f0f8ff;
+      font-family: Arial, sans-serif;
+      position: relative;
+      cursor: pointer;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin: 10px;
+      color: #333;
+    }
+
+    .info {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .balloon {
+      width: 40px;
+      height: 60px;
+      background-color: red;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: absolute;
+      bottom: 0;
+      transition: transform 4s ease-out, opacity 4s ease-out;
+    }
+
+    .string {
+      width: 2px;
+      height: 30px;
+      background: black;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Student Information -->
+  <div class="info">
+    <h2>Balloon Animation</h2>
+    <p><strong>Created by:</strong> Mahi Chudasama</p>
+    <p><strong>Enrollment No.:</strong> 240905040020</p>
+    <p><em>Click anywhere on the screen to release balloons 🎈</em></p>
+  </div>
+
+  <script>
+    document.body.addEventListener("click", function(e) {
+      let balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+
+      // Random color
+      const colors = ["#FF69B4", "#87CEEB", "#FFD700", "#32CD32", "#FFA07A"];
+      balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+      // Set position
+      balloon.style.left = e.clientX - 20 + "px";
+      balloon.style.bottom = "0px";
+
+      // Create string
+      let string = document.createElement("div");
+      string.classList.add("string");
+      balloon.appendChild(string);
+
+      document.body.appendChild(balloon);
+
+      // Animate upward
+      setTimeout(() => {
+        balloon.style.transform = "translateY(-100vh)";
+        balloon.style.opacity = 0;
+      }, 100);
+
+      // Remove after animation
+      setTimeout(() => {
+        balloon.remove();
+      }, 4000);
+    });
+  </script>
+
+</body>
+</html>
